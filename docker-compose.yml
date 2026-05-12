@@ -1,6 +1,6 @@
 services:
   frontend:
-    build: ./front_despacho
+    image: ${DOCKERHUB_USERNAME}/innovatech-frontend:latest
     ports:
       - "80:80"
     depends_on:
@@ -11,15 +11,15 @@ services:
       - innovatech-net
 
   backend-despachos:
-    build: ./back-Despachos_SpringBoot/Springboot-API-REST-DESPACHO
+    image: ${DOCKERHUB_USERNAME}/innovatech-backend-despachos:latest
     ports:
       - "8081:8081"
     environment:
       DB_ENDPOINT: db-despachos
       DB_PORT: 3306
-      DB_NAME: ${DB_DESPACHOS_NAME}
-      DB_USERNAME: ${DB_DESPACHOS_USER}
-      DB_PASSWORD: ${DB_DESPACHOS_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
     depends_on:
       db-despachos:
         condition: service_healthy
@@ -28,15 +28,15 @@ services:
       - innovatech-net
 
   backend-ventas:
-    build: ./back-Ventas_SpringBoot/Springboot-API-REST
+    image: ${DOCKERHUB_USERNAME}/innovatech-backend-ventas:latest
     ports:
       - "8082:8080"
     environment:
       DB_ENDPOINT: db-ventas
       DB_PORT: 3306
-      DB_NAME: ${DB_VENTAS_NAME}
-      DB_USERNAME: ${DB_VENTAS_USER}
-      DB_PASSWORD: ${DB_VENTAS_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}
     depends_on:
       db-ventas:
         condition: service_healthy
@@ -49,10 +49,10 @@ services:
     ports:
       - "3306:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_DESPACHOS_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${DB_DESPACHOS_NAME}
-      MYSQL_USER: ${DB_DESPACHOS_USER}
-      MYSQL_PASSWORD: ${DB_DESPACHOS_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
       - mysql-despachos-data:/var/lib/mysql
     healthcheck:
@@ -69,10 +69,10 @@ services:
     ports:
       - "3307:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_VENTAS_ROOT_PASSWORD}
-      MYSQL_DATABASE: ${DB_VENTAS_NAME}
-      MYSQL_USER: ${DB_VENTAS_USER}
-      MYSQL_PASSWORD: ${DB_VENTAS_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     volumes:
       - mysql-ventas-data:/var/lib/mysql
     healthcheck:
