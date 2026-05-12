@@ -1,4 +1,4 @@
-# Innovatech Chile - Sistema de Logística y Ventas
+# Innovatech Chile - Sistema de Logística y Ventas <!-- actualizado -->
 
 Sistema web para gestión de despachos y ventas. Compuesto por un frontend React y dos APIs Spring Boot independientes, cada una con su propia base de datos MySQL.
 
@@ -48,7 +48,7 @@ docker-compose up -d
 - API Despachos: http://localhost:8081/api/v1/despachos
 - API Ventas: http://localhost:8082/api/v1/ventas
 
-## Variables de entorno (.env)
+## Variables de entorno .env
 
 ```
 MYSQL_DESPACHOS_ROOT_PASSWORD=
