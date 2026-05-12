@@ -1,0 +1,93 @@
+services:
+  frontend:
+    build: ./front_despacho
+    ports:
+      - "80:80"
+    depends_on:
+      - backend-despachos
+      - backend-ventas
+    restart: unless-stopped
+    networks:
+      - innovatech-net
+
+  backend-despachos:
+    build: ./back-Despachos_SpringBoot/Springboot-API-REST-DESPACHO
+    ports:
+      - "8081:8081"
+    environment:
+      DB_ENDPOINT: db-despachos
+      DB_PORT: 3306
+      DB_NAME: ${DB_DESPACHOS_NAME}
+      DB_USERNAME: ${DB_DESPACHOS_USER}
+      DB_PASSWORD: ${DB_DESPACHOS_PASSWORD}
+    depends_on:
+      db-despachos:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - innovatech-net
+
+  backend-ventas:
+    build: ./back-Ventas_SpringBoot/Springboot-API-REST
+    ports:
+      - "8082:8080"
+    environment:
+      DB_ENDPOINT: db-ventas
+      DB_PORT: 3306
+      DB_NAME: ${DB_VENTAS_NAME}
+      DB_USERNAME: ${DB_VENTAS_USER}
+      DB_PASSWORD: ${DB_VENTAS_PASSWORD}
+    depends_on:
+      db-ventas:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - innovatech-net
+
+  db-despachos:
+    image: mysql:8.0
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_DESPACHOS_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_DESPACHOS_NAME}
+      MYSQL_USER: ${DB_DESPACHOS_USER}
+      MYSQL_PASSWORD: ${DB_DESPACHOS_PASSWORD}
+    volumes:
+      - mysql-despachos-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - innovatech-net
+
+  db-ventas:
+    image: mysql:8.0
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_VENTAS_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${DB_VENTAS_NAME}
+      MYSQL_USER: ${DB_VENTAS_USER}
+      MYSQL_PASSWORD: ${DB_VENTAS_PASSWORD}
+    volumes:
+      - mysql-ventas-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - innovatech-net
+
+volumes:
+  mysql-despachos-data:
+  mysql-ventas-data:
+
+networks:
+  innovatech-net:
+    driver: bridge

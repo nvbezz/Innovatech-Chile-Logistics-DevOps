@@ -1,8 +1,48 @@
-# React + Vite
+# Frontend - Innovatech Chile
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación React para gestión de despachos y ventas. Construida con Vite 5 y TailwindCSS, se conecta a los backends mediante axios.
 
-Currently, two official plugins are available:
+## Tecnologías
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React 18 + Vite 5
+- TailwindCSS 3
+- Axios, React Router DOM 6, SweetAlert2
+
+## Desarrollo local
+
+```bash
+npm install
+npm run dev
+```
+
+Disponible en `http://localhost:5173`.
+
+## Build de producción
+
+```bash
+npm run build
+```
+
+Genera la carpeta `dist/` que sirve Nginx en el contenedor Docker.
+
+## Docker
+
+```bash
+docker build -t innovatech-frontend .
+docker run -p 80:80 innovatech-frontend
+```
+
+## Estructura
+
+```
+src/
+├── assets/
+├── componentes/
+├── Routes/
+└── main.jsx
+```
+
+## APIs consumidas
+
+- `GET/POST/PUT/DELETE /api/v1/despachos`
+- `GET/POST/PUT/DELETE /api/v1/ventas`
