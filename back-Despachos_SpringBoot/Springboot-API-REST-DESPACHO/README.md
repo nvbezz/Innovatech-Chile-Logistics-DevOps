@@ -2,7 +2,7 @@
 
 API REST para gestión de despachos del proyecto Innovatech Chile. Desarrollada con Spring Boot 3.4.4 y Java 17, conectada a base de datos MySQL.
 
-## Tecnologías del Proyecto
+## Tecnologías Utilizadas
 
 - Spring Boot 3.4.4 / Java 17
 - Spring Data JPA + MySQL 8.0
