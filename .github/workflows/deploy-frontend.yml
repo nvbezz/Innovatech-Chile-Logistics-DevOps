@@ -22,7 +22,8 @@ jobs:
       - name: Build and push Docker image
         run: |
           docker build \
-            --build-arg VITE_API_URL=${{ secrets.VITE_API_URL }} \
+            --build-arg VITE_API_VENTAS=${{ secrets.VITE_API_VENTAS }} \
+            --build-arg VITE_API_DESPACHOS=${{ secrets.VITE_API_DESPACHOS }} \
             -t ${{ secrets.DOCKERHUB_USERNAME }}/innovatech-frontend:latest \
             -t ${{ secrets.DOCKERHUB_USERNAME }}/innovatech-frontend:${{ github.sha }} \
             ./front_despacho

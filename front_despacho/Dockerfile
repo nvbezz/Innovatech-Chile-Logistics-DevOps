@@ -3,8 +3,10 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
-ARG VITE_API_URL
-ENV VITE_API_URL=$VITE_API_URL
+ARG VITE_API_VENTAS
+ARG VITE_API_DESPACHOS
+ENV VITE_API_VENTAS=$VITE_API_VENTAS
+ENV VITE_API_DESPACHOS=$VITE_API_DESPACHOS
 RUN npm run build
 
 FROM nginxinc/nginx-unprivileged:alpine AS runtime
