@@ -1,4 +1,4 @@
-# Innovatech Chile - Sistema de Logística y Ventas <!-- actualizado -->
+# Innovatech Chile - Sistema de Logística y Ventas 
 
 Sistema web para gestión de despachos y ventas. Compuesto por un frontend React y dos APIs Spring Boot independientes, cada una con su propia base de datos MySQL.
 
