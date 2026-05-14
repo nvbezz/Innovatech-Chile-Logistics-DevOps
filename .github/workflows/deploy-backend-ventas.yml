@@ -51,7 +51,6 @@ jobs:
           host: ${{ secrets.EC2_BACKEND_HOST }}
           username: ${{ secrets.EC2_USERNAME }}
           key: ${{ secrets.EC2_SSH_KEY }}
-          envs: DOCKERHUB_USERNAME,DB_NAME,DB_USERNAME,DB_PASSWORD
           script: |
             export DOCKERHUB_USERNAME=${{ secrets.DOCKERHUB_USERNAME }}
             export DB_NAME=${{ secrets.DB_NAME }}
@@ -59,4 +58,5 @@ jobs:
             export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/innovatech-backend-ventas:latest
             cd ~/innovatech
-            docker compose up -d --force-recreate backend-ventas
+            docker compose down --remove-orphans
+            docker compose up -d
