@@ -58,5 +58,4 @@ jobs:
             export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/innovatech-backend-ventas:latest
             cd ~/innovatech
-            docker compose down --remove-orphans
-            docker compose up -d
+            docker compose up -d --force-recreate --no-deps backend-ventas
